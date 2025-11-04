@@ -1,3 +1,41 @@
+/* ---------- GOTHAM FONT SETUP ---------- */
+@font-face {
+  font-family: "Gotham";
+  src: url("/assets/fonts/gotham/Gotham-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/assets/fonts/gotham/Gotham-Book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/assets/fonts/gotham/Gotham-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/assets/fonts/gotham/Gotham-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/assets/fonts/gotham/Gotham-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ✅ Global defaults */
 @import "tailwindcss";
 
 :root {
@@ -8,8 +46,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Gotham", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,12 +56,14 @@
   }
 }
 
+/* ✅ Keep Gotham as global font */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Gotham", sans-serif;
 }
 
+/* ---------- ANIMATIONS ---------- */
 @keyframes spin-slow {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -34,55 +73,28 @@ body {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 .animate-fadeIn {
   animation: fadeIn 0.8s ease forwards;
 }
 
 @keyframes boxSlideOut {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-200px);
-  }
-  100% {
-    transform: translateX(0);
-  }
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-200px); }
+  100% { transform: translateX(0); }
 }
-
 @keyframes textSlideOutIn {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  40% {
-    opacity: 0;
-    transform: translateX(-50vw); /* fade out to half of screen */
-  }
-  60% {
-    opacity: 0;
-    transform: translateX(-50vw); /* new text comes from right */
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  0% { opacity: 1; transform: translateX(0); }
+  40% { opacity: 0; transform: translateX(-30vw); }
+  60% { opacity: 0; transform: translateX(-30vw); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.animate-boxSlide { animation: boxSlideOut 1.2s ease-in-out; }
+.animate-textSlide { animation: textSlideOutIn 1.2s ease-in-out forwards; }
+
+html {
+  font-size: clamp(14px, 1.1vw, 18px);
 }
 
-.animate-boxSlide {
-  animation: boxSlideOut 1.2s ease-in-out;
-}
-
-.animate-textSlide {
-  animation: textSlideOutIn 1.2s ease-in-out;
-}

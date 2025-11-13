@@ -22,13 +22,17 @@ export default function Header() {
       <div className="flex items-center justify-between px-4 md:px-12">
         {/* Logo */}
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-full bg-white" />
+          <img
+            src="/assets/nav/Ellipse 153.png"
+            alt="SAGE Logo"
+            className="w-15 h-15 rounded-full object-cover"
+          />
           <div className="flex flex-col leading-none">
             <h1 className="text-[28px] md:text-[34px] font-black leading-none">
-              LOGO
+              SAGE
             </h1>
             <span className="text-[10px] md:text-[12px] uppercase text-white/70">
-              LOGO SUBTITLE
+              RESEARCH CONSULTING
             </span>
           </div>
         </div>
@@ -80,7 +84,7 @@ export default function Header() {
             <FaSearch className="text-white text-sm" />
           </button>
 
-          {/* 🍔 Hamburger menu */}
+          {/* Hamburger menu */}
           <button onClick={() => setMenuOpen(!menuOpen)} className="p-2">
             {menuOpen ? (
               <FaTimes className="text-white text-xl" />
@@ -91,9 +95,9 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 📱 Mobile Dropdown */}
+      {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="lg:hidden absolute top-[72px] left-0 w-full bg-[#0E2038]/95 flex flex-col space-y-4 p-6 text-center z-30">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-[#0E2038]/95 flex flex-col space-y-4 p-6 text-center z-30">
           {navItems.map((item, i) => (
             <a
               key={i}

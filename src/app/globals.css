@@ -61,6 +61,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "Gotham", sans-serif;
+  
 }
 
 /* ---------- ANIMATIONS ---------- */
@@ -171,10 +172,78 @@ html {
   }
 
   .animate-slideInLeft {
-    animation: slideInLeft 0.8s ease forwards;
+    animation: slideInLeft 0.10s ease forwards;
   }
 
   .animate-slideInRight {
-    animation: slideInRight 0.8s ease forwards;
+    animation: slideInRight 0.20s ease forwards;
   }
 }
+
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+
+/* 👈 Move scrollbar to the left side */
+#system-sidebar {
+  direction: rtl; /* flips scrollbar to left */
+}
+
+/* 👇 Keep text & buttons aligned correctly */
+#system-sidebar > * {
+  direction: ltr; /* restore normal text direction */
+}
+
+/* 🌟 Sky blue scrollbar styling */
+#system-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+#system-sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+#system-sidebar::-webkit-scrollbar {
+  width: 6px;
+  background-color: rgba(255, 255, 255, 0.05); /* Track visible even when not scrolling */
+}
+
+#system-sidebar::-webkit-scrollbar-thumb {
+  background: #38bdf8; /* sky-400 */
+  border-radius: 4px;
+  opacity: 1; 
+  visibility: visible;
+}
+
+#system-sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: #38bdf8 rgba(255, 255, 255, 0.07);
+}
+
+
+/* Optional: Add subtle glow effect to make it blend better */
+#system-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #0ea5e9;
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.6);
+}
+
+/* Track always visible too */
+#system-sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-slideInLeft { animation: slideInLeft 0.8s ease forwards; }
+.animate-slideInRight { animation: slideInRight 0.8s ease forwards; }

@@ -12,23 +12,23 @@ export default function Overview() {
   return (
     <section
       id="overview-section"
-      className="relative w-full bg-[#00152A] text-white overflow-hidden py-24 flex flex-col items-center justify-center"
+      className="relative w-full bg-[#00152A] bg-contain text-white overflow-hidden  flex flex-col items-center justify-center "
     >
       {/* Background */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-40"
+        className="absolute inset-0 bg-contain bg-no-repeat bg-center "
         style={{ backgroundImage: "url('/assets/nav/Frame 12676.png')" }}
       ></div>
 
       {/* Title */}
-      <div className="relative z-10 text-center mb-10">
+      <div className="relative z-10 text-center mb-5 mt-30">
         <h2 className="text-3xl md:text-4xl font-bold uppercase">
           <span className="text-sky-400">OVERVIEW OF</span> PROJECTS
         </h2>
       </div>
 
       {/* TOGGLE BAR (Exact Figma Size) */}
-      <div className="relative z-10 mb-14">
+      <div className="relative z-10 mb-0">
         <div
           className="
             relative 
@@ -87,7 +87,7 @@ export default function Overview() {
       </div>
 
       {/* Dynamic Content */}
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 w-full mt-0">
         {activeTab === "anterior" ? <Anterior /> : <Posterior />}
       </div>
 

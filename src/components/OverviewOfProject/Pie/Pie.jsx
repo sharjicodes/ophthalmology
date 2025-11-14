@@ -1,12 +1,13 @@
 "use client";
-
 import AnteriorPie from "./AnteriorPie";
 import PosteriorPie from "./PosteriorPie";
 
-/**
- * Pie wrapper - chooses which pie to render based on `variant`.
- * Pass variant="anterior" or "posterior".
- */
-export default function Pie({ variant = "anterior" }) {
-  return variant === "anterior" ? <AnteriorPie /> : <PosteriorPie />;
+export default function Pie({ variant }) {
+  const rotate = variant === "posterior"; 
+
+  return variant === "anterior" ? (
+    <AnteriorPie rotate={rotate} />
+  ) : (
+    <PosteriorPie rotate={rotate} />
+  );
 }

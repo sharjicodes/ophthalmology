@@ -6,21 +6,21 @@ export default function Posterior() {
   return (
     <div className="relative w-full flex flex-col lg:flex-row items-center justify-center gap-12 max-w-[1500px] mx-auto px-6 md:px-12 mt-10">
 
-      {/* ⭐ FIXED IMAGE GROUP (Machine + Rays + Eye) */}
+      
       <div
         className="
           relative 
           w-[900px] h-[350px] min-w-[900px] min-h-[350px]
          -translate-x-74 sm:-translate-x-50 md:-translate-x-10 lg:-translate-x-24
 
-          /* ⭐ RESPONSIVE SCALING — this is what makes the whole block shrink */
-          scale-[0.35]        /* very small screens */
+          
+          scale-[0.35]        
           sm:scale-[0.45]
           md:scale-[0.50]
           lg:scale-[0.75]
           xl:scale-80
           
-          origin-center  /* keeps the anchor in the center */
+          origin-center  
           
           flex-shrink-0 mx-auto
         "

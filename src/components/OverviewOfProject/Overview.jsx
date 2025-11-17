@@ -27,7 +27,7 @@ export default function Overview() {
         </h2>
       </div>
 
-      {/* TOGGLE BAR (Exact Figma Size) */}
+      {/* TOGGLE BAR */}
       <div className="relative z-10 mb-0">
         <div
           className="

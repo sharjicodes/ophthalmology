@@ -5,11 +5,11 @@ import Image from "next/image";
 export default function PosteriorPie({rotate}) {
   return (
     <div className="relative w-full flex items-center justify-center mt-0 px-6 md:px-12">
-      {/* PIE + BACKGROUND EYE WRAPPER */}
+      
       <div className="relative w-[372px] h-[530px] flex-shrink-0 left-9">
 
         
-        {/* BACK-MOST BACKGROUND EYE */}
+        
                 <Image
                   src="/assets/nav/BG Eye image.png"
                   alt="BG Eye Layer"

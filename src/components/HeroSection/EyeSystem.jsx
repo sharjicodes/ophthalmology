@@ -13,7 +13,7 @@ export default function EyeSystem({
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // match Tailwind’s md breakpoint
+      setIsMobile(window.innerWidth < 768); 
     };
     handleResize();
     window.addEventListener("resize", handleResize);

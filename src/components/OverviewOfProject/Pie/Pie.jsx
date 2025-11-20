@@ -1,13 +1,25 @@
 "use client";
+
+import { useMediaQuery } from "react-responsive";
 import AnteriorPie from "./AnteriorPie";
 import PosteriorPie from "./PosteriorPie";
+import MobileAnteriorPie from "./MobileAnteriorPie";
+import MobilePosteriorPie from "./MobilePosteriorPie";
 
 export default function Pie({ variant }) {
-  const rotate = variant === "posterior"; 
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  if (isMobile) {
+    return variant === "anterior" ? (
+      <MobileAnteriorPie variant={variant} />
+    ) : (
+      <MobilePosteriorPie variant={variant} />
+    );
+  }
 
   return variant === "anterior" ? (
-    <AnteriorPie rotate={rotate} />
+    <AnteriorPie variant={variant} />
   ) : (
-    <PosteriorPie rotate={rotate} />
+    <PosteriorPie variant={variant} />
   );
 }

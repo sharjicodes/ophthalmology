@@ -8,6 +8,9 @@ import InfoVision from "./HeroSection/InfoVision";
 import ChatAndBody from "./EyeIsTheWindow/ChatAndBody";
 import Header from "./Header"; // Import the separated Header
 import Overview from "./OverviewOfProject/Overview";
+import Outreach from "@/components/OurOutreach/Outreach";
+
+
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("concept");
@@ -130,7 +133,7 @@ useEffect(() => {
 
     setRotation((prevRotation) => {
       const rawDiff = newRotation - prevRotation;
-      const normalizedDiff = ((rawDiff + 540) % 360) - 180; // shortest signed angle between -180° and 180°
+      const normalizedDiff = ((rawDiff + 540) % 360) - 180; 
       return prevRotation + normalizedDiff;
     });
 
@@ -160,7 +163,7 @@ useEffect(() => {
     return () => observer.disconnect();
   }, []);
 
-  //  Each active tab defines a different rotation offset for all labels
+  
   const getLabelDisplayRotation = (label) => {
     const rotationMap = {
       concept: { MARKET: 360, CONCEPT: 90, DESIGN: 0, TRIAL: -90 },
@@ -225,7 +228,7 @@ useEffect(() => {
             }}
           ></div>
 
-          {/* 🌊 Curved Divider at the bottom */}
+          {/* Curved Divider at the bottom */}
           <div
             className="absolute bottom-[4px] left-0 w-full h-[120px] flex justify-center items-end "
             // style={{
@@ -281,7 +284,7 @@ useEffect(() => {
             activeTab={activeTab}
             handleTabClick={handleTabClick}
             getLabelDisplayRotation={getLabelDisplayRotation}
-            isCompactLayout={isCompactLayout} // 👈 pass the flag
+            isCompactLayout={isCompactLayout} 
           />
 
           {/* Arrow Change Based on Layout */}
@@ -374,6 +377,7 @@ useEffect(() => {
         </div>
       </section>
       <Overview />
+      <Outreach />
     </>
   );
 }

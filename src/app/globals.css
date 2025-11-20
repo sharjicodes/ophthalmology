@@ -35,7 +35,7 @@
   font-display: swap;
 }
 
-/* ✅ Global defaults */
+/*  Global defaults */
 @import "tailwindcss";
 
 :root {
@@ -56,7 +56,7 @@
   }
 }
 
-/* ✅ Keep Gotham as global font */
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -64,7 +64,7 @@ body {
   
 }
 
-/* ---------- ANIMATIONS ---------- */
+
 @keyframes spin-slow {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -188,12 +188,12 @@ html, body {
 }
 
 
-/* 👈 Move scrollbar to the left side */
+/* Move scrollbar to the left side */
 #system-sidebar {
   direction: rtl; /* flips scrollbar to left */
 }
 
-/* 👇 Keep text & buttons aligned correctly */
+/*  Keep text & buttons aligned correctly */
 #system-sidebar > * {
   direction: ltr; /* restore normal text direction */
 }
@@ -247,3 +247,24 @@ html, body {
 }
 .animate-slideInLeft { animation: slideInLeft 0.8s ease forwards; }
 .animate-slideInRight { animation: slideInRight 0.8s ease forwards; }
+
+@keyframes spin-once {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(45deg); }
+}
+
+@keyframes spin-once-anterior {
+  from { transform: rotate(45deg); }
+  to { transform: rotate(0deg); }
+}
+
+@layer utilities {
+  .spin-once {
+    animation: spin-once 1s linear;
+  }
+  .spin-once-anterior {
+    animation: spin-once-anterior 1s linear;
+  }
+}
+
+

@@ -1,23 +1,63 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Anterior from "./Anterior";
 import Posterior from "./Posterior";
 import Pie from "./Pie/Pie";
-
+import MobileAnterior from "./MobileAnterior";
+import MobilePosterior from "./MobilePosterior";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Overview() {
   const [activeTab, setActiveTab] = useState("anterior");
+  const [isMobile, setIsMobile] = useState(false);
+  const [userInteracted, setUserInteracted] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  // AUTO TOGGLE
+  useEffect(() => {
+    if (userInteracted) return;
+
+    const interval = setInterval(() => {
+      setActiveTab((prev) => (prev === "anterior" ? "posterior" : "anterior"));
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [userInteracted]);
 
   return (
     <section
       id="overview-section"
-      className="relative w-full bg-[#00152A] bg-contain text-white overflow-hidden  flex flex-col items-center justify-center "
+      className="
+    relative w-full  text-white overflow-hidden  
+    flex flex-col items-center justify-center 
+    bg-[#00152A]
+  "
     >
-      {/* Background */}
+      {/* DESKTOP/TABLET BACKGROUND (unchanged) */}
       <div
-        className="absolute inset-0 bg-contain bg-no-repeat bg-center "
+        className="
+      absolute inset-0 
+      bg-cover bg-no-repeat bg-center
+      hidden sm:block        
+    "
         style={{ backgroundImage: "url('/assets/nav/Frame 12676.png')" }}
+      ></div>
+
+      {/* MOBILE BACKGROUND */}
+      <div
+        className="
+      absolute inset-0 
+      bg-cover bg-no-repeat bg-center
+      block sm:hidden        
+    "
+        style={{ backgroundImage: "url('/assets/nav/overview_mobile.png')" }}
       ></div>
 
       {/* Title */}
@@ -32,8 +72,9 @@ export default function Overview() {
         <div
           className="
             relative 
-            w-[392px] 
-            h-[49px] 
+            w-[240px] h-[38px]          
+            sm:w-[392px] sm:h-[49px]
+           
             bg-[#1B2B47] 
             rounded-md 
             flex 
@@ -51,7 +92,10 @@ export default function Overview() {
 
           {/* ANTERIOR BUTTON */}
           <button
-            onClick={() => setActiveTab("anterior")}
+            onClick={() => {
+              setUserInteracted(true); // Stop auto switch
+              setActiveTab("anterior");
+            }}
             className={`
               relative z-10 w-1/2 h-full 
               font-semibold text-base 
@@ -64,7 +108,10 @@ export default function Overview() {
 
           {/* POSTERIOR BUTTON */}
           <button
-            onClick={() => setActiveTab("posterior")}
+            onClick={() => {
+              setUserInteracted(true); // Stop auto switch
+              setActiveTab("posterior");
+            }}
             className={`
               relative z-10 w-1/2 h-full 
               font-semibold text-base 
@@ -76,24 +123,67 @@ export default function Overview() {
           </button>
         </div>
 
-        {/* Underline indicator */}
-        <div
-          className={`
-            mx-auto mt-0.5 h-[4px] w-[28px] bg-sky-400 
-            transition-all duration-300
-            ${activeTab === "anterior" ? "translate-x-[-98px]" : "translate-x-[98px]"}
-          `}
-        ></div>
+        {/* Underline indicators */}
+        <div className="relative h-[12px] mt-0.5 flex justify-center">
+          {/* ANTERIOR underline */}
+          <AnimatePresence mode="wait">
+            {activeTab === "anterior" && (
+              <motion.div
+                key="underline-anterior"
+                initial={{ x: -180, opacity: 0 }}
+                animate={{
+                  x: isMobile ? -55 : -100, // mobile / desktop
+                  opacity: 1,
+                }}
+                exit={{ x: -180, opacity: 0 }}
+                transition={{ duration: 0.55, ease: "easeInOut" }}
+                className="
+          absolute 
+          h-[3px] w-[20px] sm:h-[4px] sm:w-[28px]
+          bg-sky-400 
+        "
+              />
+            )}
+          </AnimatePresence>
+
+          {/* POSTERIOR underline */}
+          <AnimatePresence mode="wait">
+            {activeTab === "posterior" && (
+              <motion.div
+                key="underline-posterior"
+                initial={{ x: -10, opacity: 0 }}
+                animate={{
+                  x: isMobile ? 55 : 100,
+                  opacity: 1,
+                }}
+                exit={{ x: -10, opacity: 0 }}
+                transition={{ duration: 0.55, ease: "easeInOut" }}
+                className="
+          absolute 
+          h-[3px] w-[20px] sm:h-[4px] sm:w-[28px]
+          bg-sky-400 
+        "
+              />
+            )}
+          </AnimatePresence>
+        </div>
       </div>
 
       {/* Dynamic Content */}
-      <div className="relative z-10 w-full mt-0">
-        {activeTab === "anterior" ? <Anterior /> : <Posterior />}
+      <div className="relative z-10 w-full mt-0 space-y-0 pb-0">
+        {/* MOBILE VERSION */}
+        <div className="sm:hidden">
+          {activeTab === "anterior" ? <MobileAnterior /> : <MobilePosterior />}
+        </div>
+
+        {/* DESKTOP/TABLET VERSION */}
+        <div className="hidden sm:block">
+          {activeTab === "anterior" ? <Anterior /> : <Posterior />}
+        </div>
       </div>
 
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 w-full -mt-16 md:-mt-20 lg:-mt-24 lg:-ml-20 xl:-ml-32">
         <Pie variant={activeTab} />
-
       </div>
     </section>
   );
